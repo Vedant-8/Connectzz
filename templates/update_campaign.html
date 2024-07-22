@@ -1,0 +1,88 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card p-3 campaign-card-inner">
+      <div class="card-body">
+        <h5 class="card-title">Update Campaign</h5>
+        <form method="POST">
+          {{ form.hidden_tag() }}
+          <div class="mb-3">
+            {{ form.name.label(class="form-label") }} {{
+            form.name(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.description.label(class="form-label") }} {{
+            form.description(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.start_date.label(class="form-label") }} {{
+            form.start_date(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.end_date.label(class="form-label") }} {{
+            form.end_date(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.budget.label(class="form-label") }} {{
+            form.budget(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.visibility.label(class="form-label") }} {{
+            form.visibility(class="form-control") }}
+          </div>
+          <div class="mb-3">
+            {{ form.goals.label(class="form-label") }} {{
+            form.goals(class="form-control") }}
+          </div>
+          <button type="submit" class="btn btn-primary">Update Campaign</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  .campaign-card-inner {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border: none; 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .campaign-card-inner:hover {
+    transform: translateY(-5px) scale(1.02); 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
+  }
+
+  .card-title,
+  .form-label {
+    color: #e0e0e0; 
+  }
+
+  .form-control {
+    background-color: rgba(
+      255,
+      255,
+      255,
+      0.1
+    ); 
+    color: #e0e0e0; 
+    border: none; 
+    border-radius: 5px;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
+  }
+
+  .btn-primary {
+    background-color: #007bff; 
+    border: none; 
+  }
+
+  .btn-primary:hover {
+    background-color: #0056b3; 
+  }
+</style>
+{% endblock %}

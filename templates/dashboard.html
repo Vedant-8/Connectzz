@@ -1,0 +1,12 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    <div class="card">
+      <div class="card-header">Dashboard</div>
+      <div class="card-body">
+        <p>Welcome, {{ current_user.username }}!</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

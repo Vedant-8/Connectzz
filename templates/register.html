@@ -1,0 +1,134 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-6">
+    <div class="card register-card">
+      <div class="card-body">
+        <form method="POST" action="{{ url_for('register') }}">
+          {{ form.hidden_tag() }}
+
+          <div class="mb-3">
+            {{ form.username.label(class="form-label") }} {{
+            form.username(class="form-control") }} {% for error in
+            form.username.errors %}
+            <div class="alert alert-danger mt-2">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            {{ form.password.label(class="form-label") }} {{
+            form.password(class="form-control") }} {% for error in
+            form.password.errors %}
+            <div class="alert alert-danger mt-2">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            {{ form.confirm_password.label(class="form-label") }} {{
+            form.confirm_password(class="form-control") }} {% for error in
+            form.confirm_password.errors %}
+            <div class="alert alert-danger mt-2">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <div class="mb-3">
+            {{ form.role.label(class="form-label") }} {{
+            form.role(class="form-control custom-select") }} {% for error in
+            form.role.errors %}
+            <div class="alert alert-danger mt-2">{{ error }}</div>
+            {% endfor %}
+          </div>
+
+          <button type="submit" class="btn btn-primary w-100">Register</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap");
+
+  body {
+    font-family: "Roboto", sans-serif;
+  }
+
+  .register-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .register-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+
+  .card-header {
+    background-color: transparent;
+    border-bottom: none;
+    color: #ffffff;
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .card-body {
+    color: #e0e0e0;
+  }
+
+  .form-label {
+    color: #e0e0e0;
+    font-weight: 500;
+  }
+
+  .form-control {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    color: #e0e0e0;
+    font-weight: 400;
+  }
+
+  .form-control:focus {
+    background-color: #2c2c2c;
+    border-color: #bb86fc;
+    box-shadow: 0 0 0 0.2rem rgba(187, 134, 252, 0.25);
+  }
+
+  .btn-primary {
+    background-color: #bb86fc;
+    border-color: #bb86fc;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #9d6be8;
+    border-color: #9d6be8;
+  }
+
+  .custom-select {
+    background-color: #2c2c2c;
+    border: 1px solid #444;
+    color: #e0e0e0;
+    font-weight: 400;
+  }
+
+  .custom-select option {
+    background-color: #2c2c2c;
+    color: #e0e0e0;
+  }
+
+  .alert {
+    padding: 0.375rem 0.75rem;
+    margin-bottom: 1rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+  }
+
+  .alert-danger {
+    color: #721c24;
+    background-color: #f8d7da;
+    border-color: #f5c6cb;
+  }
+</style>
+{% endblock %}

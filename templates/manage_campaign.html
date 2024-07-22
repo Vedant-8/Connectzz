@@ -1,0 +1,72 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    {% for campaign in campaigns %}
+    <div class="mb-4 campaign-card">
+      <div class="card p-3 campaign-card-inner">
+        <h5 class="card-title">{{ campaign.name }}</h5>
+        <p class="card-text">{{ campaign.description }}</p>
+        <p class="card-text">Budget: ${{ campaign.budget }}</p>
+        <p class="card-text">Start Date: {{ campaign.start_date }}</p>
+        <p class="card-text">End Date: {{ campaign.end_date }}</p>
+        <p class="card-text">Visibility: {{ campaign.visibility }}</p>
+        <p class="card-text">Influencers Joined:</p>
+        <ul class="list-group">
+          {% for influencer in joined_influencers.get(campaign.id, []) %}
+          <li class="list-group-item">{{ influencer.username }}</li>
+          {% endfor %}
+        </ul>
+        {% if current_user.id == campaign.sponsor_id %}
+        <div class="mt-3">
+          <a
+            href="{{ url_for('update_campaign', campaign_id=campaign.id) }}"
+            class="btn btn-sm btn-primary mr-2"
+            >Update</a
+          >
+          <form
+            action="{{ url_for('delete_campaign', campaign_id=campaign.id) }}"
+            method="post"
+            style="display: inline-block"
+          >
+            <button
+              type="submit"
+              class="btn btn-sm btn-danger"
+              onclick="return confirm('Are you sure you want to delete this campaign?')"
+            >
+              Delete
+            </button>
+          </form>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  .campaign-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .campaign-card-inner {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .campaign-card:hover .campaign-card-inner {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  .card-title,
+  .card-text {
+    color: #e0e0e0;
+  }
+  .list-group-item {
+    background-color: transparent;
+    color: #e0e0e0;
+  }
+</style>
+{% endblock %}

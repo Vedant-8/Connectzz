@@ -1,0 +1,102 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h2>Sponsor Dashboard</h2>
+  <div class="row">
+    <div class="col-md-4">
+      <a
+        href="{{ url_for('create_campaign') }}"
+        class="btn btn-primary btn-lg btn-block"
+      >
+        Create Campaign
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a
+        href="{{ url_for('manage_campaigns') }}"
+        class="btn btn-success btn-lg btn-block"
+      >
+        Manage Campaigns
+      </a>
+    </div>
+    <div class="col-md-4">
+      <a
+        href="{{ url_for('view_ad_requests') }}"
+        class="btn btn-info btn-lg btn-block"
+      >
+        View Ad Requests
+      </a>
+    </div>
+  </div>
+
+  <div class="card mt-4 profile-card">
+    <div class="card-body">
+      <h5 class="card-title">Your Profile</h5>
+      <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+          <strong>Username:</strong> {{ current_user.username }}
+        </li>
+        <li class="list-group-item"><strong>Role:</strong> Sponsor</li>
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: #121212; 
+    color: #e0e0e0; 
+  }
+
+  .profile-card {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 20px;
+  }
+
+  .profile-card:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
+  }
+
+  .card-title {
+    color: #ffffff; 
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  .list-group-item {
+    background-color: transparent;
+    color: #e0e0e0; 
+  }
+
+  .btn {
+    background-color: transparent;
+    border-color: transparent;
+    font-weight: 500;
+    margin-top: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: scale(1.05); 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
+  }
+
+  .btn-primary {
+    color: #bb86fc; 
+  }
+
+  .btn-success {
+    color: #4caf50; 
+  }
+
+  .btn-info {
+    color: #03a9f4; 
+  }
+</style>
+{% endblock %}

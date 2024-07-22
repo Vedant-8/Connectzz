@@ -1,0 +1,91 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Submit Ad Request</h2>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      <form
+        method="post"
+        action="{{ url_for('submit_ad_request', campaign_id=campaign.id) }}"
+      >
+        {{ form.hidden_tag() }}
+
+        <div class="form-group">
+          {{ form.content.label(class="form-control-label") }} {{
+          form.content(class="form-control" + (' is-invalid' if
+          form.content.errors else '')) }} {% if form.content.errors %}
+          <div class="invalid-feedback">
+            {% for error in form.content.errors %}
+            <span>{{ error }}</span><br />
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        <div class="form-group">
+          {{ form.payment_amount.label(class="form-control-label") }} {{
+          form.payment_amount(class="form-control" + (' is-invalid' if
+          form.payment_amount.errors else '')) }} {% if
+          form.payment_amount.errors %}
+          <div class="invalid-feedback">
+            {% for error in form.payment_amount.errors %}
+            <span>{{ error }}</span><br />
+            {% endfor %}
+          </div>
+          {% endif %}
+        </div>
+
+        {{ form.csrf_token }}
+        <button type="submit" class="btn btn-primary">Submit Ad Request</button>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: #121212; 
+    color: #e0e0e0; 
+  }
+
+  form {
+    background-color: rgba(255, 255, 255, 0.1); 
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3); 
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  form:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5); 
+  }
+
+  .form-control-label {
+    color: #ffffff; 
+  }
+
+  .form-control {
+    background-color: transparent;
+    border-color: rgba(255, 255, 255, 0.2); 
+    color: #e0e0e0; 
+  }
+
+  .form-control:focus {
+    border-color: #bb86fc; 
+    box-shadow: none;
+  }
+
+  .btn-primary {
+    background-color: #bb86fc; 
+    border-color: #bb86fc;
+    font-weight: 500;
+  }
+
+  .btn-primary:hover {
+    background-color: #9d6be8; 
+    border-color: #9d6be8;
+  }
+</style>
+{% endblock %}

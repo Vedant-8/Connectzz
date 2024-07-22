@@ -1,0 +1,58 @@
+{% extends 'base.html' %} {% block content %}
+<div class="row justify-content-center mt-4">
+  <div class="col-md-8">
+    {% for campaign in campaigns %}
+    <div class="mb-4 campaign-card">
+      <div class="card p-3 campaign-card-inner">
+        <h5 class="card-title">{{ campaign.name }}</h5>
+        <p class="card-text">{{ campaign.description }}</p>
+        <p class="card-text">Budget: ${{ campaign.budget }}</p>
+        <br />
+        {% if current_user.role == 'influencer' %} {% if
+        joined_campaigns.get(campaign.id) %}
+        <button class="btn btn-success" disabled>Joined</button>
+        <br />
+        <form
+          method="post"
+          action="{{ url_for('submit_ad_request', campaign_id=campaign.id) }}"
+        >
+          <button type="submit" class="btn btn-primary">
+            Submit Ad Request
+          </button>
+        </form>
+        {% else %}
+        <form
+          method="post"
+          action="{{ url_for('join_campaign', campaign_id=campaign.id) }}"
+        >
+          <button type="submit" class="btn btn-primary">Join Campaign</button>
+        </form>
+        {% endif %} {% endif %}
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  .campaign-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+  .campaign-card-inner {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+  .campaign-card:hover .campaign-card-inner {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+  .card-title,
+  .card-text {
+    color: #e0e0e0;
+  }
+</style>
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html' %} {% block content %}
+<div class="container mt-4">
+  <h2 class="text-center mb-4">Ad Requests</h2>
+
+  <div class="row">
+    <div class="col-md-8 offset-md-2">
+      {% for ad_request in ad_requests %}
+      <div class="card mb-3 ad-request-card">
+        <div class="card-body">
+          <h5 class="card-title">Ad Request {{ ad_request.id }}</h5>
+          <p class="card-text">
+            <strong>Campaign:</strong> {{ ad_request.campaign.name }}
+          </p>
+          <p class="card-text">
+            <strong>Content:</strong> {{ ad_request.content }}
+          </p>
+          <p class="card-text">
+            <strong>Payment amount:</strong> {{ ad_request.payment_amount }}
+          </p>
+          <p class="card-text">
+            <strong>Status:</strong> {{ ad_request.status }}
+          </p>
+          {% if current_user.role == 'sponsor' %}
+          <div class="btn-group">
+            <form
+              action="{{ url_for('approve_ad_request', ad_request_id=ad_request.id) }}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-success btn-sm mr-2">
+                Approve
+              </button>
+            </form>
+            <form
+              action="{{ url_for('reject_ad_request', ad_request_id=ad_request.id) }}"
+              method="post"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-danger btn-sm mr-2">
+                Reject
+              </button>
+            </form>
+            <form
+              method="post"
+              action="{{ url_for('negotiate_ad_request', ad_request_id=ad_request.id) }}"
+              style="display: inline"
+            >
+              <button type="submit" class="btn btn-primary btn-sm">
+                Negotiate
+              </button>
+            </form>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+      {% endfor %} {% if ad_requests|length == 0 %}
+      <p class="text-center">No ad requests found.</p>
+      {% endif %}
+    </div>
+  </div>
+</div>
+{% endblock %} {% block styles %}
+<style>
+  body {
+    font-family: "Roboto", sans-serif;
+    background-color: #121212;
+    color: #e0e0e0;
+  }
+
+  .ad-request-card {
+    background-color: rgba(255, 255, 255, 0.1);
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-bottom: 20px;
+  }
+
+  .ad-request-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+  }
+
+  .card-title,
+  .card-text {
+    color: #e0e0e0;
+  }
+
+  .btn-success,
+  .btn-danger,
+  .btn-primary {
+    color: #ffffff;
+  }
+
+  .btn-success:hover,
+  .btn-danger:hover,
+  .btn-primary:hover {
+    opacity: 0.8;
+  }
+
+  .btn-group {
+    margin-top: 10px;
+  }
+
+  .btn-group form {
+    display: inline-block;
+  }
+
+  .btn-group .btn {
+    margin-right: 5px;
+  }
+</style>
+{% endblock %}
